@@ -26,13 +26,14 @@ def control():
         z = quad_state.pose.position.z
         print 'z:', z
 
-        simple_controller = False
+        simple_controller = True
 
         if simple_controller:
             robot_tw = Twist()
             robot_tw.linear.z = (1.4-z)*0.3
             pub.publish(robot_tw)
         else:
+            # TODO: Fix direct control, not currently working well
             motor_pwm = MotorPWM()
             k = 60
             pwm = 40+int(k*(1.4-z))
@@ -46,4 +47,9 @@ def control():
 
 
 if __name__ == '__main__':
-    control()
+   try:
+        control()
+    except rospy.ROSInterruptException:
+        pass
+
+

@@ -32,4 +32,9 @@ def control():
     rospy.spin()
 
 if __name__ == '__main__':
-    control()
+    try:
+        control()
+    except rospy.ROSInterruptException:
+        pass
+
+

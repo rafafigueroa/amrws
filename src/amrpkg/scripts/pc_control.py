@@ -9,7 +9,6 @@ from sensor_msgs.msg import PointCloud2
 import numpy as np
 
 
-
 def pc_callback(robot_pc):
     pc = robot_pc.data
     print pc
@@ -30,5 +29,11 @@ def control():
     rospy.spin()
 
 if __name__ == '__main__':
-    pub = rospy.Publisher('/mobile_base/commands/velocity', Twist, queue_size=10)
-    control()
+    pub = rospy.Publisher('/mobile_base/commands/velocity', 
+                          Twist, queue_size=10)
+
+    if __name__ == '__main__':
+    try:
+        control()
+    except rospy.ROSInterruptException:
+        pass
